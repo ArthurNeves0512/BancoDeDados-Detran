@@ -52,6 +52,7 @@ primary key(cpf)
 )default charset utf8;
 alter table proprietario
 modify data_nascimento date;
+
 create table telefone(
 proprietario_cpf integer(11) not null,
 foreign key(proprietario_cpf) references proprietario(cpf)
@@ -62,7 +63,7 @@ alter table infracao
 add foreign key (chassi_veiculo,placa_veiculo) references veiculo(chassi,placa);
 
 alter table veiculo
-add foreign key(cpf_proprietario) references proprietario(cpf), /*como declara foreign key caraio?*/
+add foreign key(cpf_proprietario) references proprietario(cpf),
 add foreign key(matricula_agente_infracao,codigo_associado_infracao,cod_do_local_infracao,data_hora_infracao) references infracao(matricula,codigo_associado,cod_do_local,data_hora);
 
 create table veiculo_infracao(
@@ -73,22 +74,23 @@ select * from veiculo,infracao where veiculo.placa=infracao.codigo_associado and
 
 
 
-/*    AQUI TA OS COMANDOS PARA INSERIR EM CADA TABELA, DEPOIS É SÓ TU RODAR RLX SÓ ESTÁ FALTANDO O DO POINT ALI NA TABELA INFRACAO
-
 insert into proprietario values
-(67854687913, "arthur', m, 1882-2-1,3213321,"eunície barbosa","salgado de são felix","paraíba", "dsai312", "321mijiseer"),
-(32156790812, "roberto', m, 2020-2-20,3254321,"coxas de asa","boa braba","goiás", "dhi5412", "321mi54bseer"),
-(33154314332, "arnold', m, 1994-4-3,2136542,"samba","fuxico","pará", "ds23i32", "321mijiseer");
+(678546879, "arthur", "m", "1882-2-1",3213321,"eunície barbosa","salgado de são felix","paraíba", "dsai312", "321mijiseer"),
+(321567908, "roberto", "m", "2020-2-20",3254321,"coxas de asa","boa braba","goiás", "dhi5412", "321mi54bseer"),
+(331543143, "arnold", "m", "1994-4-3",2136542,"samba","fuxico","pará", "ds23i32", "304mijiseer");
+
+alter table infracao
+modify posicao_geografica geometry;
 
 insert into infracao values
-(12,32,321,90453,"jośe", 21,2019-3-2, 60,###colocar o point nao sei como funciona,'2021-12-18 13:17:17', 323,"321mijiseer", "dsai312"),
-(43,65,123,35313,"marcos", 21,2016-4-2, 40,###colocar o point nao sei como funciona,'2019-12-18 14:17:17', 313,"321mi54bseer", "dhi5412"),
-(67,30,654,53353,"oswaldo", 21,2015-6-2, 80,###colocar o point nao sei como funciona,'2018-12-18 15:17:17', 343,"321mijiseer", "ds23i32");
-
+(12,32,321,90453,"jośe", 21,"2019-3-2", 60,"geometryn(35 5)","2021-12-18 13:17:17", 323,"321mijiseer", "dsai312"),
+(43,65,123,35313,"marcos", 21,"2016-4-2", 40,"geometryn(32 8)","2019-12-18 14:17:17", 313,"321mi54bseer", "dhi5412"),
+(67,30,654,53353,"oswaldo", 21,"2015-6-2", 80,"geometryn(98 2)","2018-12-18 15:17:17", 343,"304mijiseer", "ds23i32");
+/*
 insert into veiculo values
 ("gol", "preto","321mijiseer","dsai312","b",2015-2-18, 67854687913,90453,321,323,'2021-12-18 13:17:17')
 ("palio", "azul","321mi54bseer","dhi5412","b",2013-2-18, 32156790812,35313,123,313,'2019-12-18 14:17:17')
-("classic", "branco","321mijiseer","ds23i32","b",2015-6-18, 33154314332,53353,654,343,'2018-12-18 15:17:17')
+("classic", "branco","304mijiseer","ds23i32","b",2015-6-18, 33154314332,53353,654,343,'2018-12-18 15:17:17')
 */
 
 /*   AQUI TA OS COMANDOS PARA ATUALIZAÇÃO NO BANCO JÁ QUE SÃO SÓ 3 MESMO, ENTÃO TÁ SUAVE
